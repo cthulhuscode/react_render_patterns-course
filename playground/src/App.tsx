@@ -1,27 +1,27 @@
-import { useContext } from "react";
+import { useContext } from 'react'
 import {
   CreateTodoButton,
   Modal,
   TodoCounter,
   TodoForm,
   TodoList,
-  TodoSearch,
-} from "./components";
-import { TodosContext } from "./context";
+  TodoSearch
+} from './components'
+import { TodosContext } from './context'
 
 const App = () => {
-  const { openModal, setOpenModal } = useContext(TodosContext);
+  const { openModal, setOpenModal } = useContext(TodosContext)
 
   return (
-    <div className="container">
-      <h1 className="title">Todo App</h1>
+    <div className='container'>
+      <h1 className='title'>Todo App</h1>
       <TodoCounter />
 
       <TodoSearch />
 
       <TodoList />
 
-      {!!openModal && document.getElementById("modal") && (
+      {!!openModal && (document.getElementById('modal') != null) && (
         <Modal closeModal={setOpenModal}>
           <TodoForm />
         </Modal>
@@ -29,7 +29,7 @@ const App = () => {
 
       <CreateTodoButton />
     </div>
-  );
-};
+  )
+}
 
-export default App;
+export default App
