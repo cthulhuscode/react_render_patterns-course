@@ -1,0 +1,7 @@
+/* TodoList */
+.TodoList ul{
+  list-style: none;  
+  display: flex;  
+  flex-flow: column nowrap;
+  gap: 10px;
+}

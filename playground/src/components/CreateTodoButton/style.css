@@ -1,0 +1,20 @@
+/* CreateTodoButton */
+.CreateTodoButton{
+  cursor: pointer;
+  width: 150px;
+  height: 30px;
+  border-radius: 10px;
+  border: 2px solid #008f00;
+  background-color: transparent;
+  font-size: 1rem;
+  color: #008f00;  
+}
+
+.CreateTodoButton:hover{
+  background-color: #008f00;
+  color: #fff;
+}
+
+.on-modal{
+  display: none;
+}

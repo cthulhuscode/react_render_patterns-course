@@ -1,0 +1,56 @@
+.TodosLoading-list{
+  list-style: none;  
+  display: flex;  
+  flex-flow: column nowrap;
+  gap: 10px;
+  border-radius: 8px;
+}
+
+/* TodoItem */
+.TodosLoading-list_item{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: center;  
+  justify-content: space-between;  
+
+  font-size: 1.3rem;
+  padding: 10px;
+  border: 1px solid #cccccc;
+  border-radius: 10px;
+
+  inline-size: 300px;
+  word-break: break-all; 
+}
+
+.TodosLoading-list_item-text{
+  color: #cccccc;
+}
+
+.TodosLoading-list_item-icon{
+  cursor: pointer;  
+  color: #cccccc;  
+}
+
+
+.TodosLoading-list_item,
+.TodosLoading-list_item-icon
+{
+  background: linear-gradient(90deg, rgba(250, 250, 250, 1), rgb(230, 230, 230));
+  background-size: 400% 400%;
+  animation: loadingAnimation 2s ease-in-out infinite;
+}
+
+@keyframes loadingAnimation {
+  0%{
+    background-position: 0% 50%;    
+  }
+  50%{
+    background-position: 100% 50%;
+  }
+  100%{
+    background-position: 0% 50%;
+  }
+}

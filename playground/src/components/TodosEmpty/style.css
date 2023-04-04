@@ -1,0 +1,12 @@
+.TodosEmpty{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 500px;
+  height: 200px;
+
+  font-size: 1.3rem;
+  color: rgb(131, 131, 131);
+}
