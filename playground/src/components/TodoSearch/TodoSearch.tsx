@@ -1,22 +1,24 @@
-import { ChangeEvent, EventHandler, useContext } from 'react'
-import { TodosContext } from '../../context/TodosContext'
-import './style.css'
+import { ChangeEvent, Dispatch, SetStateAction } from "react";
+import "./style.css";
 
-export const TodoSearch = () => {
-  const { searchVal, setSearchVal } = useContext(TodosContext)
+interface TodoSearchProps {
+  searchVal: string;
+  setSearchVal: Dispatch<SetStateAction<string>>;
+}
 
+export const TodoSearch = ({ searchVal, setSearchVal }: TodoSearchProps) => {
   const onSearch = (e: ChangeEvent<HTMLInputElement>) => {
-    setSearchVal(e.target.value)
-  }
+    setSearchVal(e.target.value);
+  };
 
   return (
-    <div className='TodoSearch'>
+    <div className="TodoSearch">
       <input
-        type='text'
-        placeholder='hacer...'
+        type="text"
+        placeholder="hacer..."
         onChange={onSearch}
         value={searchVal}
       />
     </div>
-  )
-}
+  );
+};

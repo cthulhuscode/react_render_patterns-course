@@ -1,35 +1,76 @@
-import { useContext } from 'react'
 import {
   CreateTodoButton,
   Modal,
   TodoCounter,
   TodoForm,
+  TodoHeader,
+  TodoItem,
   TodoList,
-  TodoSearch
-} from './components'
-import { TodosContext } from './context'
+  TodoSearch,
+  TodosEmpty,
+  TodosError,
+  TodosLoading,
+} from "./components";
+import { ITodo } from "./interfaces";
+import { useTodos } from "./hooks";
 
 const App = () => {
-  const { openModal, setOpenModal } = useContext(TodosContext)
+  const {
+    openModal,
+    error,
+    loading,
+    searchedTodos,
+    todosCount,
+    searchVal,
+    completedTodosCount,
+    setOpenModal,
+    setSearchVal,
+    addTodo,
+    toggleCompletion,
+    deleteTodo,
+  } = useTodos();
 
   return (
-    <div className='container'>
-      <h1 className='title'>Todo App</h1>
-      <TodoCounter />
+    <div className="container">
+      <h1 className="title">Todo App</h1>
 
-      <TodoSearch />
+      <TodoHeader>
+        <TodoCounter
+          todosCount={todosCount}
+          completedTodosCount={completedTodosCount}
+        />
+        <TodoSearch searchVal={searchVal} setSearchVal={setSearchVal} />
+      </TodoHeader>
 
-      <TodoList />
+      <TodoList>
+        {error && <TodosError />}
+        {loading && <TodosLoading />}
+        {!loading && searchedTodos.length === 0 && !error && <TodosEmpty />}
 
-      {!!openModal && (document.getElementById('modal') != null) && (
+        {searchedTodos.map((todo: ITodo) => (
+          <TodoItem
+            key={todo.text}
+            todo={todo}
+            toggleCompletion={toggleCompletion}
+            deleteTodo={deleteTodo}
+          />
+        ))}
+      </TodoList>
+
+      {!!openModal && document.getElementById("modal") != null && (
         <Modal closeModal={setOpenModal}>
-          <TodoForm />
+          <TodoForm setOpenModal={setOpenModal} addTodo={addTodo} />
         </Modal>
       )}
 
-      <CreateTodoButton />
+      <CreateTodoButton
+        setOpenModal={setOpenModal}
+        openModal={openModal}
+        error={error}
+        loading={loading}
+      />
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;

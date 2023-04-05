@@ -1,24 +1,33 @@
-import { useContext } from 'react'
-import './style.css'
-import { TodosContext } from '../../context'
+import { Dispatch, SetStateAction } from "react";
+import "./style.css";
 
-export const CreateTodoButton = () => {
-  const { setOpenModal, openModal, error, loading } = useContext(TodosContext)
+interface CreateTodoButtonProps {
+  setOpenModal: Dispatch<SetStateAction<boolean>>;
+  openModal: boolean;
+  error: boolean | Error;
+  loading: boolean;
+}
 
+export const CreateTodoButton = ({
+  setOpenModal,
+  openModal,
+  error,
+  loading,
+}: CreateTodoButtonProps) => {
   const onNewTodo = () => {
-    setOpenModal(true)
-  }
+    setOpenModal(true);
+  };
 
   return (
     <>
       {!error && !loading && (
         <button
-          className={`CreateTodoButton ${openModal && 'on-modal'}`}
+          className={`CreateTodoButton ${openModal && "on-modal"}`}
           onClick={() => onNewTodo()}
         >
           New Todo
         </button>
       )}
     </>
-  )
-}
+  );
+};
