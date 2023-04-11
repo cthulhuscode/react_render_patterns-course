@@ -11,7 +11,6 @@ import {
   TodosError,
   TodosLoading,
 } from "./components";
-import { ITodo } from "./interfaces";
 import { useTodos } from "./hooks";
 
 const App = () => {
@@ -34,7 +33,7 @@ const App = () => {
     <div className="container">
       <h1 className="title">Todo App</h1>
 
-      <TodoHeader>
+      <TodoHeader loading={loading}>
         <TodoCounter
           todosCount={todosCount}
           completedTodosCount={completedTodosCount}
@@ -42,19 +41,24 @@ const App = () => {
         <TodoSearch searchVal={searchVal} setSearchVal={setSearchVal} />
       </TodoHeader>
 
-      <TodoList>
-        {error && <TodosError />}
-        {loading && <TodosLoading />}
-        {!loading && searchedTodos.length === 0 && !error && <TodosEmpty />}
-
-        {searchedTodos.map((todo: ITodo) => (
+      <TodoList
+        todosCount={todosCount}
+        loading={loading}
+        error={error}
+        todos={searchedTodos}
+        onError={() => <TodosError />}
+        onLoading={() => <TodosLoading />}
+        onEmpty={() => <TodosEmpty />}
+        onEmptySearchResults={() => <p>{searchVal} wasn't found</p>}
+      >
+        {(todo) => (
           <TodoItem
             key={todo.text}
             todo={todo}
             toggleCompletion={toggleCompletion}
             deleteTodo={deleteTodo}
           />
-        ))}
+        )}
       </TodoList>
 
       {!!openModal && document.getElementById("modal") != null && (

@@ -1,5 +1,5 @@
 /* TodoSearch */
-.TodoSearch > input{
+.TodoSearch > input {
   width: 250px;
   height: 40px;
   border-radius: 8px;
@@ -8,6 +8,10 @@
   font-size: 1.2rem;
 }
 
-.TodoSearch > input:focus{
- outline: 1px solid rgb(35, 209, 35);
+.TodoSearch > input:focus {
+  outline: 1px solid rgb(35, 209, 35);
+}
+
+.TodoSearch > input:disabled {
+  opacity: 50%;
 }
