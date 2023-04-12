@@ -10,3 +10,4 @@ export * from "./TodosEmpty/TodosEmpty";
 export * from "./TodosError/TodosError";
 export * from "./TodosLoading/TodosLoading";
 export * from "./TodoHeader/TodoHeader";
+export * from "./ChangeAlert/ChangeAlert";

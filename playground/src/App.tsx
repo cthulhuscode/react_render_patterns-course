@@ -10,6 +10,8 @@ import {
   TodosEmpty,
   TodosError,
   TodosLoading,
+  ChangeAlert,
+  ChangeAlertWithLocalStorageListener,
 } from "./components";
 import { useTodos } from "./hooks";
 
@@ -73,6 +75,8 @@ const App = () => {
         error={error}
         loading={loading}
       />
+
+      <ChangeAlertWithLocalStorageListener />
     </div>
   );
 };
