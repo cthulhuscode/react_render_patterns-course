@@ -29,6 +29,7 @@ const App = () => {
     addTodo,
     toggleCompletion,
     deleteTodo,
+    synchronizeTodos,
   } = useTodos();
 
   return (
@@ -76,7 +77,7 @@ const App = () => {
         loading={loading}
       />
 
-      <ChangeAlertWithLocalStorageListener />
+      <ChangeAlertWithLocalStorageListener synchronize={synchronizeTodos} />
     </div>
   );
 };
