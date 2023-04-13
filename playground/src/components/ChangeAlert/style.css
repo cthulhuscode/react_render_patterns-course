@@ -1,0 +1,27 @@
+.calert {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.calert__info {
+  font-size: 14px;
+  color: #f3a600;
+}
+
+.calert__btn {
+  cursor: pointer;
+  width: 80px;
+  height: 30px;
+  border-radius: 10px;
+  border: 2px solid #f3a600;
+  background-color: transparent;
+  font-size: 1rem;
+  color: #f3a600;
+}
+
+.calert__btn:hover {
+  background-color: #f3a600;
+  color: #fff;
+}

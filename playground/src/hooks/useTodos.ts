@@ -25,6 +25,7 @@ export const useTodos = () => {
     loading,
     error,
     setItem: setTodos,
+    synchronizeItem: synchronizeTodos,
   } = useLocalStorage("todos_v1", []);
   const [searchVal, setSearchVal] = useState("");
   const [openModal, setOpenModal] = useState(false);
@@ -80,5 +81,6 @@ export const useTodos = () => {
     toggleCompletion,
     addTodo,
     deleteTodo,
+    synchronizeTodos,
   };
 };
