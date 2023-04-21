@@ -1,13 +1,29 @@
-import { useState, useEffect } from "react";
+import { useEffect, useReducer } from "react";
+import {
+  onError,
+  onLoading,
+  onSaveItem,
+  onSuccess,
+  onSynchronizeItem,
+} from "../reducers/actionCreators";
+import reducer from "../reducers/reducer";
 
-export const useLocalStorage = (
-  itemName: string,
-  initialValue: any | [] = []
-) => {
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<boolean | Error>(false);
-  const [item, setItem] = useState(initialValue);
-  const [isItemSynchronized, setIsItemSynchronized] = useState(true);
+export interface InitialStateType {
+  loading: boolean;
+  error: boolean;
+  item: [];
+  isItemSynchronized: boolean;
+}
+
+export const useLocalStorage = (itemName: string, initialValue: [] = []) => {
+  const initialState: InitialStateType = {
+    loading: true,
+    error: false,
+    item: initialValue,
+    isItemSynchronized: true,
+  };
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const { loading, error, item, isItemSynchronized } = state;
 
   useEffect(() => {
     setTimeout(() => {
@@ -20,30 +36,25 @@ export const useLocalStorage = (
           parsedItem = [];
         } else parsedItem = JSON.parse(localStorageItem);
 
-        setItem(parsedItem);
-        setLoading(false);
-        setIsItemSynchronized(true);
+        dispatch(onSuccess(parsedItem));
       } catch (e) {
-        setError(e as Error);
-        setLoading(false);
+        console.log(e);
+        dispatch(onError(true));
+        dispatch(onLoading(false));
       }
     }, 2000);
   }, [isItemSynchronized]);
 
-  const saveItem = (newItem: any) => {
+  const saveItems = (newItems: any) => {
     try {
-      localStorage.setItem(itemName, JSON.stringify(newItem));
-      setItem(newItem);
+      localStorage.setItem(itemName, JSON.stringify(newItems));
+      dispatch(onSaveItem(newItems));
     } catch (e) {
-      setError(e as Error);
-      setLoading(false);
+      dispatch(onError(true));
     }
   };
 
-  const synchronizeItem = () => {
-    setLoading(true);
-    setIsItemSynchronized(false);
-  };
+  const synchronizeItem = () => dispatch(onSynchronizeItem());
 
-  return { item, error, loading, setItem: saveItem, synchronizeItem };
+  return { item, error, loading, setItem: saveItems, synchronizeItem };
 };
